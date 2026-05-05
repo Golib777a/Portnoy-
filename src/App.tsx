@@ -4,8 +4,6 @@ import Markdown from 'react-markdown';
 import { Camera, Image as ImageIcon, Scissors, Loader2, Upload, ChevronLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-
 export default function App() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [base64Data, setBase64Data] = useState<string | null>(null);
@@ -48,6 +46,13 @@ export default function App() {
     setError(null);
     
     try {
+      const apiKey = process.env.GEMINI_API_KEY;
+      if (!apiKey) {
+        throw new Error("Не найден ключ API (GEMINI_API_KEY). Пожалуйста, задайте его в настройках или в переменных окружения при сборке.");
+      }
+      
+      const ai = new GoogleGenAI({ apiKey });
+      
       const prompt = `Ты опытный профессиональный портной и конструктор одежды. Я отправляю тебе фотографию одежды. 
 Твоя задача:
 1. Проанализировать фасон, ткань и детали одежды на фото (воротники, рукава, силуэт, карманы, вытачки и т.д.).
@@ -68,9 +73,13 @@ export default function App() {
       });
       
       setResult(response.text || "Извините, не удалось сгенерировать инструкции.");
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      setError("Произошла ошибка при анализе изображения. Пожалуйста, попробуйте еще раз.");
+      if (err.message && err.message.includes('API')) {
+        setError(err.message);
+      } else {
+        setError("Произошла ошибка при анализе изображения. Пожалуйста, попробуйте еще раз.");
+      }
     } finally {
       setIsProcessing(false);
     }
