@@ -1,0 +1,17 @@
+{
+  "name": "Личный Портной",
+  "short_name": "Портной",
+  "description": "Приложение для генерации инструкций по пошиву по фото одежды",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f2ed",
+  "theme_color": "#8b5a2b",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Личный Портной",
+  "description": "Приложение для генерации инструкций по пошиву и выкроек по фото одежды с помощью ИИ.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": []
+}
