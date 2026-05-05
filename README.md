@@ -1,20 +1,62 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Личный Портной (Personal Tailor PWA)
 
-# Run and deploy your AI Studio app
+"Личный Портной" — это веб-приложение (PWA) на базе искусственного интеллекта (Google Gemini), которое работает как ваш виртуальный закройщик и портной. Вы можете загрузить любую фотографию одежды, а приложение проанализирует её и сгенерирует подробную инструкцию по пошиву, схему раскроя и рекомендации по выбору ткани.
 
-This contains everything you need to run your app locally.
+## Возможности
 
-View your app in AI Studio: https://ai.studio/apps/36b3e1a1-1ff8-466c-8476-5d6de3fb35d3
+- 📸 **Анализ по фото**: Сделайте фото на камеру или загрузите из галереи.
+- ✂️ **Подробные инструкции**: ИИ разбивает процесс на понятные шаги (подбор ткани, раскрой, пошив).
+- 📱 **PWA (Progressive Web App)**: Приложение можно установить на главный экран телефона как обычное нативное приложение.
+- 🎨 **Адаптивный дизайн**: Красивый и отзывчивый интерфейс, стилизованный под интерфейс современного ателье.
 
-## Run Locally
+## Технологии
 
-**Prerequisites:**  Node.js
+- React 19
+- Vite
+- Tailwind CSS v4
+- Google Gemini API (`@google/genai`)
+- PWA (Service Workers, Web App Manifest)
+- Иконки: Lucide React
 
+## Локальный запуск
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+1. **Клонируйте репозиторий:**
+   ```bash
+   git clone <url-репозитория>
+   cd <название-папки>
+   ```
+
+2. **Установите зависимости:**
+   ```bash
+   npm install
+   ```
+
+3. **Настройте переменные окружения:**
+   Скопируйте файл `.env.example` в `.env` и добавьте ваш ключ API от Google Gemini:
+   ```bash
+   cp .env.example .env
+   ```
+   Откройте `.env` и впишите свой ключ:
+   ```env
+   GEMINI_API_KEY="ВАШ_КЛЮЧ_GEMINI_API"
+   ```
+
+4. **Запустите сервер разработки:**
+   ```bash
+   npm run dev
+   ```
+   Приложение будет доступно по адресу `http://localhost:3000`.
+
+## Сборка для продакшена (GitHub Pages, Vercel, Netlify и т.д.)
+
+Для сборки стабильной версии приложения выполните команду:
+```bash
+npm run build
+```
+Готовые статические файлы будут находиться в папке `dist`.
+
+> **Важно:** При развертывании на хостинге (например, Vercel или Netlify) не забудьте добавить переменную окружения `GEMINI_API_KEY` в настройках проекта на самом хостинге, так как она нужна на этапе сборки (Vite подставляет её в клиентский код).
+
+## Установка на телефон (PWA)
+
+Откройте сайт приложения браузером на телефоне (Safari для iOS или Chrome для Android) и выберите опцию «На экран "Домой"» (Add to Home Screen). Приложение появится среди ваших иконок и будет открываться на весь экран.
